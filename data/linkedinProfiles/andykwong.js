@@ -1,0 +1,6 @@
+var andyKwong = { "title": ["full stack developer"],
+  "headline": ["Full Stack Rails Developer at HYFN"],
+  "summary": ["I am a Software Developer that has an affinity for working with Ruby on Rails. I love to solve problems and create solutions for real-world applications. As a full-stack developer, I can write both front-end and back-end components, with excellent user experience as my major focus.Toolsets: - APIs: Amazon SDK, Braintree, Doximity, Mailchimp, Meetup, Eventbrite, Google Analytics, Facebook Marketing- Back-end: Ruby on Rails, PostgreSQL, mySQL, Redis, Memcached- Front-end: HTML5, CSS3, SASS, Javascript, CoffeesScript, AngularJS, Backbone.js, jQuery, AJAX, Slim, Bootstrap, Reponsive Web Design- Hybrid Mobile Development: Cordova/Phonegap, Ionic- Infrastructure/Ops: Heroku, Nginx, AWS(S3, Cloudfront)- Project Management: Agile SCRUM, Bitbucket, Github, Hipchat, Pivotal Tracker, Slack, Trello, JIRA- Testing: Capybara, FactoryGirl, RSpec, Selenium"],
+"connections": 265,
+"positionSummary": "Developer for the HYFN8 product, the most intuitive social media advertising tool on the market.",
+"positionTitle": "Full Stack Rails Developer"}
