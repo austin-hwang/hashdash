@@ -1,0 +1,13 @@
+1. Get job title and linkedin profile from user on frontend
+2. Frontend sends job title and profile to get-score web service (make a http request with data attachment)
+3. Get-score web service sends job title to get-skills web service to get the keywords
+4. Check if keywords match any words in linkedin profile in get-score web service
+5. Calculate score
+6. Send score to frontend to display, http response
+
+30% headline
+20% summary
+keywords in employment history
+how many connections
+how long employment history
+location

@@ -1,0 +1,91 @@
+<html>
+
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	 crossorigin="anonymous">
+	<style>
+		body {
+			font-family: "Arial", sans-serif;
+			font-size: 18px;
+		}
+
+		#container {
+			padding: 20px;
+			padding-bottom: 5px;
+		}
+
+		#score {
+			padding: 20px;
+			padding-top: 5px;
+		}
+	</style>
+	<script>
+		var summary, headline, connections, positionSummary, positionTitle;
+		function OnLinkedInFrameworkLoad() {
+			console.log('OnLinkedInFrameworkLoad')
+			IN.Event.on(IN, "auth", OnLinkedInAuth);
+		}
+		function OnLinkedInAuth() {
+			console.log('OnLinkedInAuth')
+			//IN.API.Profile("me").result(ShowProfileData);
+			IN.API.Profile("me")
+				.fields([
+					"firstName", "lastName", "headline", "summary", "positions:(company,title,summary,startDate,endDate,isCurrent)", "industry",
+					"location:(name,country:(code))", "pictureUrl", "publicProfileUrl", "emailAddress",
+					"educations", "dateOfBirth", "num-connections"]).result(ShowProfileData)
+				.error(function (err) {
+					console.error(err);
+				});
+		}
+		function ShowProfileData(profiles) {
+			var member = profiles.values[0];
+			var id = member.id;
+			var firstName = member.firstName;
+			var lastName = member.lastName;
+			var photo = member.pictureUrl;
+			headline = member.headline;
+			summary = member.summary;
+			connections = member.numConnections;
+			positionSummary = member.positions.values[0].summary;
+			positionTitle = member.positions.values[0].title;
+			console.log(profiles)
+		}
+	</script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+	<div id="container">
+		Enter your job title: <input type="text" id="jtitle">
+		<input type="submit" value="Submit" onclick="sendPost();">
+	</div>
+	<script>
+		function sendPost() {
+			console.log("entered sendPost");
+			var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+			xmlhttp.open('POST', 'https://us-central1-hatchdash.cloudfunctions.net/get-score', true);
+			//http://127.0.0.1:1337/get-score
+			//https://us-central1-hatchdash.cloudfunctions.net/get-score
+			// xmlhttp.withCredentials = true;
+			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			console.log(JSON.stringify({ title: document.getElementById("jtitle").value, headline: headline, summary: summary, connections: connections, positionSummary: positionSummary, positionTitle: positionTitle})); 
+			xmlhttp.send(JSON.stringify({ title: document.getElementById("jtitle").value, headline: headline, summary: summary, connections: connections, positionSummary: positionSummary, positionTitle: positionTitle}));
+			//xmlhttp.send(JSON.stringify(andyKwong));
+			xmlhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("score").innerHTML = xmlhttp.responseText;
+				}
+			};
+		}
+	</script>
+	<div id="score"></div>
+	<script type="in/Login">
+	</script>
+	<script type="text/javascript" src="https://platform.linkedin.com/in.js">
+		api_key: 86dh4cn3vqgatg
+		onLoad: OnLinkedInFrameworkLoad
+		authorize: true
+	</script>
+</body>
+
+</html>

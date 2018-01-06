@@ -1,0 +1,10 @@
+{
+  "name": "scrape-indeed",
+  "version": "0.0.1",
+  "dependencies": {
+    "@google-cloud/storage": "^1.1.1",
+    "cheerio": "^1.0.0-rc.1",
+    "node-schedule": "^1.2.3",
+    "request": "^2.81.0"
+  }
+}
